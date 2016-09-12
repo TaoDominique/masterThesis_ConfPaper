@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.3.28)  12 SEP 2016 20:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.3.28)  12 SEP 2016 20:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -818,12 +818,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 583--587
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 594--596
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 597--598
+Underfull \hbox (badness 10000) in paragraph at lines 596--598
 
  []
 
@@ -833,11 +828,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 599--600
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 603--604
+Underfull \hbox (badness 10000) in paragraph at lines 601--602
 
  []
 
-[9] (./IEEE_sample_new.bbl [10])
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 605--606
+
+ []
+
+(./IEEE_sample_new.bbl [10])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -873,7 +873,7 @@ sr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive
 s/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
 es/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on IEEE_sample_new.pdf (11 pages, 1445765 bytes).
+Output written on IEEE_sample_new.pdf (11 pages, 1445894 bytes).
 PDF statistics:
  100 PDF objects out of 1000 (max. 8388607)
  68 compressed objects within 1 object stream
