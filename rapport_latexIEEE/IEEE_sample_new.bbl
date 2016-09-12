@@ -1,0 +1,176 @@
+\begin{thebibliography}{10}
+
+\bibitem{CanalSpace}
+S.~Reza Ahmadzadeh and Sonia Chernova.
+\newblock Encoding demonstrations and learning new trajectories using canal
+  surfaces.
+\newblock In {\em 25th International joint Conference on Artificial
+  Intelligence (IJCAI 2016), Workshop on Interactive Machine Learning:
+  Connecting Humans and Machines}, pages 1--7, 2016.
+
+\bibitem{refKeyframe1}
+Baris Akgun, Maya Cakmak, Karl Jiang, and Andrea~Lockerd Thomaz.
+\newblock Keyframe-based learning from demonstration - method and evaluation.
+\newblock {\em I. J. Social Robotics}, 4(4):343--355, 2012.
+
+\bibitem{refKeyframe0}
+Baris Akgun, Maya Cakmak, Jae~Wook Yoo, and Andrea~Lockerd Thomaz.
+\newblock Trajectories and keyframes for kinesthetic teaching: A human-robot
+  interaction perspective.
+\newblock pages 391--398, 2012.
+
+\bibitem{BarisRRT}
+Baris Akgun and Mike Stilman.
+\newblock Sampling heuristics for optimal motion planning in high dimensions.
+\newblock In {\em IROS}, pages 2640--2645. IEEE, 2011.
+
+\bibitem{refKeyframe2}
+Baris Akgun and Andrea~Lockerd Thomaz.
+\newblock Learning constraints with keyframes.
+
+\bibitem{refCKframes}
+Baris Andrey~Kurenkov, Akgun and Andrea~Lockerd Thomaz.
+\newblock An evaluation of gui and kinesthetic teaching methods for
+  constrained-keyframe skills.
+\newblock September 2015.
+
+\bibitem{Berenson_2010_6558}
+Dmitry Berenson and Siddhartha Srinivasa.
+\newblock Probabilistically complete planning with end-effector pose
+  constraints.
+\newblock In {\em IEEE International Conference on Robotics and Automation
+  (ICRA '10)}, May 2010.
+
+\bibitem{Berenson_ConstraintManifold}
+Dmitry Berenson, Siddhartha Srinivasa, David {Ferguson }, and James Kuffner.
+\newblock Manipulation planning on constraint manifolds.
+\newblock In {\em IEEE International Conference on Robotics and Automation
+  (ICRA '09)}, May 2009.
+
+\bibitem{BerensonTSR}
+Dmitry Berenson, Siddhartha Srinivasa, and James Kuffner.
+\newblock Task space regions: A framework for pose-constrained manipulation
+  planning.
+\newblock {\em International Journal of Robotics Research (IJRR)}, 30(12):1435
+  -- 1460, October 2011.
+
+\bibitem{Bertram_2006_5436}
+Dominik Bertram, James Kuffner, Ruediger Dillmann, and Tamim Asfour.
+\newblock An integrated approach to inverse kinematics and path planning for
+  redundant manipulators.
+\newblock In {\em Proceedings of the IEEE International Conference on Robotics
+  and Automation}, pages 1874--1879. IEEE, May 2006.
+
+\bibitem{Calinon15}
+S.~Calinon.
+\newblock A tutorial on task-parameterized movement learning and retrieval.
+\newblock {\em Intelligent Service Robotics}, 2015.
+
+\bibitem{SylvainLearningGeneralizing}
+S.~Calinon, F.~Guenter, and A.~Billard.
+\newblock On learning, representing and generalizing a task in a humanoid
+  robot.
+\newblock {\em {IEEE} Transactions on Systems, Man and Cybernetics, Part {B}.
+  {S}pecial issue on robot learning by observation, demonstration and
+  imitation}, 37(2):286--298, 2007.
+
+\bibitem{ModelAndPRM}
+Gu~Ye Chris~Bowen and Ron Alterovitz.
+\newblock Asymptotically optimal motion planning for learned tasks using
+  time-dependent cost maps.
+\newblock {\em IEEE TRANSACTIONS ON AUTOMATION SCIENCE AND ENGINEERING, VOL.
+  12, NO. 1,}, JANUARY 2015.
+
+\bibitem{RRTandLFD}
+Jonathan Claassens.
+\newblock An rrt-based path planner for use in trajectory imitation.
+\newblock In {\em ICRA}, pages 3090--3095. IEEE, 2010.
+
+\bibitem{PCARRT2}
+S.~Dalibard and J.P. Laumond.
+\newblock Linear dimensionality reduction in random motion planning.
+\newblock {\em International Journal of Robotics Research}, 30(12):pp.
+  1461--1476, 2011.
+
+\bibitem{Berenson_WGR}
+Dave Ferguson Alvaro Collet James J.~Kuffner Dmitry~Berenson,
+  Siddhartha~Srinivasa.
+\newblock Manipulation planning with workspace goal regions.
+
+\bibitem{Berenson_Gradient}
+Thierry~Simeon Dmitry~Berenson and Siddhartha Srinivasa.
+\newblock Addressing cost-space chasms in manipulation planning.
+\newblock In {\em Proceedings of the IEEE International Conference on Robotics
+  and Automation (ICRA) , 4561-4568.}, May 2011.
+
+\bibitem{Filzmoser04amultivariate}
+P.~Filzmoser.
+\newblock A multivariate outlier detection method.
+\newblock In {\em State University}, pages 18--22, 2004.
+
+\bibitem{informedRRTStar}
+Jonathan~D. Gammell, Siddhartha~S. Srinivasa, and Timothy~D. Barfoot.
+\newblock Informed rrt*: Optimal incremental path planning focused through an
+  admissible ellipsoidal heuristic.
+\newblock {\em CoRR}, abs/1404.2334, 2014.
+
+\bibitem{Nearest_PSDMATRIX}
+Nicholas~J. Higham.
+\newblock Computing a nearest symmetric positive semidefinite matrix.
+
+\bibitem{KaramanRRTStar}
+Sertac Karaman and Emilio Frazzoli.
+\newblock Incremental sampling-based algorithms for optimal motion planning.
+\newblock {\em CoRR}, abs/1005.0416, 2010.
+
+\bibitem{Lavalle98rapidly-exploringrandom}
+Steven~M. Lavalle.
+\newblock Rapidly-exploring random trees: A new tool for path planning.
+\newblock Technical report, 1998.
+
+\bibitem{balancing_statespace_coveragePCA}
+Y.~Li and K.~E. Bekris.
+\newblock Balancing state-space coverage in planning with dynamics.
+\newblock In {\em IEEE International Conference on Robotics and Automation
+  (ICRA10)}, Anchorage, AK, May 2010 2010.
+
+\bibitem{AdaptiveStepSizeNatGrad}
+Takamitsu Matsubara, Tetsuro Morimura, and Jun Morimoto.
+\newblock Adaptive step-size policy gradients with average reward metric.
+\newblock In Masashi Sugiyama and Qiang Yang, editors, {\em ACML}, volume~13 of
+  {\em JMLR Proceedings}, pages 285--298. JMLR.org, 2010.
+
+\bibitem{RRTx}
+Michael Otte and Emilio Frazzoli.
+\newblock {RRT-X}: Asymptotically optimal single-query sampling-based motion
+  planning with quick replanning.
+\newblock {\em The International Journal of Robotics Research}, 2015.
+
+\bibitem{PCA_PRM}
+Jan Rosell, Ra{\'{u}}l Su{\'{a}}rez, and Alexander P{\'{e}}rez.
+\newblock Path planning for grasping operations using an adaptive pca-based
+  sampling method.
+\newblock {\em Auton. Robots}, 35(1):27--36, 2013.
+
+\bibitem{WhyAdaptiveGrad}
+S.Amari and S.C. Douglas.
+\newblock Why natural gradient ?
+
+\bibitem{PathPlanningIn1000}
+Alexander~C. Shkolnik and Russ Tedrake.
+\newblock Path planning in 1000+ dimensions using a task-space voronoi bias.
+\newblock In {\em ICRA}, pages 2061--2067. IEEE, 2009.
+
+\bibitem{RGD_RRT}
+Mike Stilman.
+\newblock Navigation among movable obstacles.
+\newblock October 2007.
+
+\bibitem{Vandeweghe_2007_5981}
+J~Michael Vandeweghe, David {Ferguson }, and Siddhartha Srinivasa.
+\newblock Randomized path planning for redundant manipulators without inverse
+  kinematics.
+\newblock In {\em IEEE-RAS International Conference on Humanoid Robots},
+  November 2007.
+
+\end{thebibliography}
