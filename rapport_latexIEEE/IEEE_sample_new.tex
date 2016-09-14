@@ -565,40 +565,36 @@ $q_{New} \leftarrow$ Steer($q_{Nearest},q$);
 \end{algorithm}
 
 \section{Experiments}
-We use a real robot to provide demonstration and a simulated robot to emulate its behavior and get results.
-We first used a real 6-dof Kinova Jaco Arm that is mounted horizontally on a robot platform as shown in figure \ref{Pic_kinesthetik_teaching} to collect keyframes data. Kinesthetic teaching was used to demonstrate the skill to the arm which was gravity-compensated. A GUI interface was utilized in order to indicate when to record the keyframe ( in joints angle (C-space) and also position-quaternion (workspace)) with the following key-phrase: "Start here" for starting the demonstration and recording the first keyframe, "Go here" to record a keyframe during the demonstration and "End here" to record the last keyframe and finish the demonstration. \\
-We then evaluated our algorithm with Moveit-Rviz simulator with the learned model in Workspace as input for our algorithm written in C++. The "Eigen" C++ library was used for the linear algebra and eigenvalues/vectors decomposition. The behavior of the robot arm was tested in 2 different scenarios. The setup for each of them was with a 0.61m x 1.22m x 0.73m table on which were disposed different objects from the YCB set. Simulation was done on a Lenovo computer with  a Intel Core i7-5600U CPU 2.60GHz × 4 processor and Nvidia GeForce 940M graphic card.\\
-In each scenario, the initial configuration of the arm is placed such that its end-effector is inside the first keyframes cluster, in other words the initial configuration of the arm is such that the entire arme is above the table. First, the user demonstrate a specific task to the robot in a environment without any obstacles and 10 successful demonstrations will be selected to learn the skill model. Then new obstacles will be added before the planning of the trajectory. Our objective is to evaluate how the robot perform the task by generating an end-to-end trajectory while respecting the Soft-Envelope constraints and finding the correct direction to avoid the obstacle.
-NB: IN IMAGE LEGEND, SPECIFY THAT COLOR == ORDER OF CLUSTER AND ONLY REPRESENTATION IN X Y Z 3D DIMENSION WORKSPACE
-
-\subsection{Parameters}
-WRITE HERE THE VALUE OF THE PARAMETER USE FOR IN THE ALGORITHM
-
-\subsection{Scenario 1: Pick and Place}
-In this scenario, the robot was taught a pick and place skill in which it has to pick an object(more likely a fruit) and put it on a dish as shown in image METTRE IMAGE ICI. During the reproduction of the skill in simulation, OBSTACLE DESCRIPTION TO BE PUT HERE  was introduced between the initial configuration of the arm and the dish as shown in image METTRE IMAGE ICI.
- The skill model is represented by 2 keyframes clusters. For this task, the position constraints is important but not the orientation as the grasped object can be turn upside down without changing the success of the task.\\
- As we can see in image METTRE IMAGE ICI, the last cluster is wide but not tall, so we are expecting the end-effector to avoid the obstacle first by trying the x-y direction before the vertical one (w.r.t. the table)
-
-\subsection{Scenario 2: Pick and drop}
- The robot is a robot holding a small object that needed to end up inside a  wine glass.
-A Che were introduced as to study the movement of the arm: a tall but slim one DECRIRE OBJECT ICI, and a large but short one DECRIRE OBJECT ICI\\
-The skill of the model is composed of 3 keyframes multivariate gaussians. The first the second gaussian describe the movement of the arm from its initial position to the area above the glass without spilling the water, the third one is superposed to the second cluster as to indicate the rotation of the end-effector to pour the water into the glass.\\
-With this task, we are dealing with position and orientation constraints. In fact, during the first movement, it is important to respect the orientation constraint in order to not spill the water while avoiding obstacle, the same with the second movement during which it must remain above the glass while correctly spinning its gripper.\\
+We first kinesthetic teaching with a real 6-dof Kinova Jaco arm mounted on a robot platform (figure \ref{Pic_kinesthetik_teaching})to collect keyframes data and a simulated robot in simulation to emulate its behavior and get results.\\
+We then evaluated our algorithm with Moveit-Rviz simulator. The program is used as an input for our algorithm written in C++. The behavior of the robot arm was tested in 2 different scenarios. The setup for each of them was with a 0.61m x 1.22m x 0.73m table on which were disposed different objects from the YCB set. Simulation was done on a Lenovo computer with  a Intel Core i7-5600U CPU 2.60GHz × 4 processor and Nvidia GeForce 940M graphic card.\\
+ The initial configuration of the arm is placed above the table with its end-effector inside the first gaussian. We tested our algorithm with 2 simple tasks whose skill models, learned with 7 successful demonstrations, are only encoded with two gaussians.  Moreover, in the next figures, the parent gaussian is in red and the child one is in blue.\\
+  Our objective is to evaluate how the robot performs the specific task by generating an end-to-end trajectory w.r.t to the Soft-Envelope while finding the correct direction to avoid the obstacle. For the two tasks, we stop the planner once a first path is found, better optimal solutions could have been found by letting the algorithm run longer.
 
 \section{Results}
-include graph et comment resutls 
-Need discussion ? 
-\section{Discussion}
-  Need to see result to know how to shape this paragraph...
-Discuss why results and why sometime fail (not JTRRT, our planner explore the c-space without any biasing in Workspace, so... Tree is constrained inside Soft-Envelope but not direction biasins and thus still have strength of exploration ==> good with concept of soft envelope since more change to take other direction)\\
+\subsection{Task 1: Pick and drop}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.22]{figure/task1Scenario.png}
+	\caption{Setup of the task 1}
+	\label{task1Scenario}
+\end{figure}
+The objective in this task is to have the end-effector, that is holding a small object(cherry fruit), go above a wine glass and release its gripper to drop the object inside. For the motion planning, a Cheez-It box is used to obstruct the arm movement as shown in figure \ref{task1Scenario}. The skill of the model in figure \ref{trajectoriesTask1} shows that the end-effector has a lot of variance in the z direction above the glass. In this task, our objective is to show how our algorithm with dimension reduction influences the trajectory generation even though the direction with the most variance is already clearly display by the gaussian. We run our algorithm 7 times, with dimension reduction of $\alpha=85 \%$ and without it. Results of the generated trajectories are pictured in figure \ref{trajectoriesTask1} \\
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.24]{figure/plotMixedTask1.png}
+	\caption{plot for task 1 of 5 trajectories by color with (left image) $\alpha = 85\%$ and (right image)$\alpha = 100\%$ }
+	\label{trajectoriesTask1}
+\end{figure}
+We can clearly see that all the trajectories with dimension reduction first follow the variance of the first gaussian (avoiding the obstacle by its side) before going up, which shows the influence of sampling along the principal components of our algorithm. While the trajectories don't look as optimal as the one calculated without reduction, they are more coherent w.r.t the demonstration given by the user (and in addition, given the same situation (example of pouring water into a glass), most people would probably have avoided a large obstacle the same way). \\
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.37]{figure/plotGraphMixTask1.png}
+	\caption{Plot of task 1 of (left image) Runtime and (right image) total number of node in tree  for each run of the algorithm (7 runs) }
+	\label{plotGraphMixTask1}
+\end{figure}
+The performances are shown with the runtime and total number of node in the tree in the figure \ref{plotGraphMixTask1}. 
+As we expected, it takes less time without reduction techniques because more joints configuration whose poses are inside the non reduced Soft-Envelope are used to grow the tree. However, not all the nodes are useful and relevant to grow the tree toward the child gaussian, which is why the total number of nodes is bigger than the one with reduce dimension. 
 
-In futur work, JT-RRT from Vend blabla is for biasing in workspace but no completeness, in our explore the C-space but not biasing ==> possibility combination\\
-
-Other things to discuss: Completness of our algorithm not proven ==> reference to Berenson work which prove it and can be use for ours since similar\\
-
-Optimality not proven either.
-
-Suggestion of evolution of the parameter $\alpha$ over time, if no solution found during the allowed time, have $\alpha$ to go to 100 and consider more eigenvector and less dimension reduction and once 100 consider everything \\
 
 \section{Future Work}
 Next logical step: consider a second point of view ==> now only move according to the variance with the model skill ==> too dependent of the demonstraiton
@@ -613,10 +609,10 @@ futur work : possibility to improve the algorithm by making it possible to deal 
 
 \section{Conclusion}
 In this paper, we have presented a trajectory planning combined with a learned skill from keyframes demonstration. The concept of Soft-Envelope was proposed to constrain the area between two keyframes gaussians in which an extension of the RRT*, PCTC-RRT*, was used to find a non-collision and available configuration space path linking two considered gaussians whose correspondent poses were around/inside the Soft-Envelope. The planner interleaves the exploration of C-space while being constrained in an area in workspace by using a double sampling process combined with gradient projection.
-The algorithm was tested on  DOIT FINIR CA AVEC LES EXPERIMENTS ET RESULTS
+The algorithm was successfully tested with two different task, showing the possible influence of the model when planning the motion. 
 
 \section{Acknowledgements}
-The authors would like to thank Aude Billard for making this joint research possible, Andrea L. Thomaz and Akgun Baris for the time that they spent for valuable help and discussions.
+The authors would like to thank Aude Billard for making this joint research possible, Andrea L. Thomaz and Akgun Baris for the valuable time that they spent for help and discussions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliography{bible}
