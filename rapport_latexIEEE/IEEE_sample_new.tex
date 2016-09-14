@@ -268,11 +268,11 @@ $N_{eigC}$ $\leftarrow$ Extract\_N\_EigenDecomp($\mb{\Sigma_{c}}$, $\alpha$);\;
 	
 	$\mb{\Sigma_{red}}^{i} \leftarrow$  Nearest\_PDMat($\mb{\Sigma}_{red}^{i}$);\;
 	\BlankLine
-	$eigVal_{Smallest} \leftarrow$ Eigen\_Decomp($\mb{\Sigma}_{red}^{i}$);\; 
+	$\lambda_{Smallest} \leftarrow$ Eigen\_Decomp($\mb{\Sigma}_{red}^{i}$);\; 
 	
 	k=0 and $\epsilon= FLT\_EPSILON $;
 	
-	\While{$eigVal_{Smallest}<0$}{
+	\While{$\lambda_{Smallest}<0$}{
 	
 		k++;
 		
@@ -567,9 +567,9 @@ $\mb{q}_{New} \leftarrow$ Steer($\mb{q}_{Nearest},\mb{q}$);
 
 \section{Experiments}
 We first kinesthetic teaching with a real 6-dof Kinova Jaco arm mounted on a robot platform (figure \ref{Pic_kinesthetik_teaching})to collect keyframes data and a simulated robot in simulation to emulate its behavior and get results.\\
-We then evaluated our algorithm with Moveit-Rviz simulator. The program is used as an input for our algorithm written in C++. The behavior of the robot arm was tested in 2 different scenarios. The setup for each of them was with a 0.61m x 1.22m x 0.73m table on which were disposed different objects from the YCB set. Simulation was done on a Lenovo computer with  a Intel Core i7-5600U CPU 2.60GHz × 4 processor and Nvidia GeForce 940M graphic card.\\
- The initial configuration of the arm is placed above the table with its end-effector inside the first gaussian. We tested our algorithm with 2 simple tasks whose skill models, learned with 7 successful demonstrations, are only encoded with two gaussians.  Moreover, in the next figures, the parent gaussian is in red and the child one is in blue.\\
-  Our objective is to evaluate how the robot performs the specific task by generating an end-to-end trajectory w.r.t to the Soft-Envelope while finding the correct direction to avoid the obstacle. For the two tasks, we stop the planner once a first path is found, better optimal solutions could have been found by letting the algorithm run longer.
+We then evaluated our algorithm with Moveit-Rviz simulator. The program is used as an input for our algorithm written in C++. The behavior of the robot arm was tested with 2 different tasks. The setup for each of them was with a 0.61m x 1.22m x 0.73m table on which were disposed different objects from the YCB set. Simulation was done on a Lenovo computer with  a Intel Core i7-5600U CPU 2.60GHz × 4 processor and Nvidia GeForce 940M graphic card.\\
+ The initial configuration of the arm is placed above the table with its end-effector inside the first gaussian. We tested our algorithm with 2 simple tasks whose skill models, learned with 7 successful demonstrations, are only encoded with two gaussians.  Moreover, in the next figures, the parent gaussian is in red and the child one is in blue. Moreover, for each task, the algorithm was run 7 times, with dimension reduction of $\alpha = 85 \%$ and without it.\\
+  Our objective is to show how our algorithm with dimension reduction influences the generation of an end-to-end trajectory w.r.t to the Soft-Envelope while finding the correct direction to avoid the obstacle. For the two tasks, we stop the planner once a first path is found, better optimal solutions could have been found by letting the algorithm run longer.
 
 \section{Results}
 \subsection{Task 1: Pick and drop}
@@ -579,38 +579,48 @@ We then evaluated our algorithm with Moveit-Rviz simulator. The program is used 
 	\caption{Setup of the task 1}
 	\label{task1Scenario}
 \end{figure}
-The objective in this task is to have the end-effector, that is holding a small object(cherry fruit), go above a wine glass and release its gripper to drop the object inside. For the motion planning, a Cheez-It box is used to obstruct the arm movement as shown in figure \ref{task1Scenario}. The skill of the model in figure \ref{trajectoriesTask1} shows that the end-effector has a lot of variance in the z direction above the glass. In this task, our objective is to show how our algorithm with dimension reduction influences the trajectory generation even though the direction with the most variance is already clearly display by the gaussian. We run our algorithm 7 times, with dimension reduction of $\alpha=85 \%$ and without it. Results of the generated trajectories are pictured in figure \ref{trajectoriesTask1} \\
+The task is to have the end-effector, that is holding a small object(cherry fruit), go above a wine glass and release its gripper to drop the object inside. For the motion planning, a Cheez-It box is used to obstruct the arm movement as shown in figure \ref{task1Scenario}. The skill of the model in figure \ref{trajectoriesTask1} shows that the end-effector has a lot of variance in the z direction above the glass. In this task, our objective is to show how our algorithm with dimension reduction influences the trajectory generation even though the direction with the most variance is already clearly display by the gaussian. Results of the generated trajectories are pictured in figure \ref{trajectoriesTask1} \\
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.24]{figure/plotMixedTask1.png}
-	\caption{plot for task 1 of 5 trajectories by color with (left image) $\alpha = 85\%$ and (right image)$\alpha = 100\%$ }
+	\includegraphics[scale=0.16]{figure/plotMixedTask1.png}
+	\caption{Plot of 5 different trajectories (distinction by color) in x,y,z space for task 1 with (right image) $\alpha = 85\%$ and (left image)$\alpha = 100\%$ }
 	\label{trajectoriesTask1}
 \end{figure}
-We can clearly see that all the trajectories with dimension reduction first follow the variance of the first gaussian (avoiding the obstacle by its side) before going up, which shows the influence of sampling along the principal components of our algorithm. While the trajectories don't look as optimal as the one calculated without reduction, they are more coherent w.r.t the demonstration given by the user (and in addition, given the same situation (example of pouring water into a glass), most people would probably have avoided a large obstacle the same way). \\
+We can clearly see that all the trajectories with dimension reduction first follow the variance of the first gaussian (avoiding the obstacle by its side) before going up (certainly following the variance of the second one), which shows the influence of our algorithm. While the trajectories don't look as optimal as the one calculated without reduction, they are more coherent w.r.t the demonstration given by the user (and in addition, given the same situation (example of pouring water into a glass), most people probably would have avoided the large obstacle the same way). \\
+\subsection{Task 2: Pick and place}
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.37]{figure/plotGraphMixTask1.png}
-	\caption{Plot of task 1 of (left image) Runtime and (right image) total number of node in tree  for each run of the algorithm (7 runs) }
-	\label{plotGraphMixTask1}
+	\includegraphics[scale=0.2]{figure/task2Scenario.png}
+	\caption{Setup of task 2}
+	\label{task2Scenario}
 \end{figure}
-The performances are shown with the runtime and total number of node in the tree in the figure \ref{plotGraphMixTask1}. 
-As we expected, it takes less time without reduction techniques because more joints configuration whose poses are inside the non reduced Soft-Envelope are used to grow the tree. However, not all the nodes are useful and relevant to grow the tree toward the child gaussian, which is why the total number of nodes is bigger than the one with reduce dimension. 
+The setup in task 2 is pictured in figure \ref{task2Scenario} in which we used the coffee can in the middle to hinder the motion. Unlike the model of task 1, this one, displayed in figure \ref{task2ModelGaussian}, show gaussians whose principal directions are less visible. The objective in this task is to show how that, with less obvious gaussians (could be from user focusing on completing the task instead of giving good demonstrations), our algorithm will still encapsulate and use these directions to influence the creation of trajectory.
+We can clearly see that without dimension reduction, the trajectories are more messy, in particular the blue and black one who are starting going left but completely deviated to the right. Furthermore, one small detail to be noticed about the influence of our algorithm with dimension reduction: trajectories start more by going along the principal component of the first gaussian unlike the other case. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.38]{figure/gaussianTask2.jpg}
+	\caption{Plot of 5 different trajectories (distinction by color) in x,y,z space for task 2 with (right image) $\alpha = 85\%$ and (left image)$\alpha = 100\%$ }
+	\label{task2ModelGaussian}
+\end{figure}
+\subsection{Tasks Performance}
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.27]{figure/RunTimeAndNbNodeTask1_2.jpg}
+	\caption{Plots: total number of node in tree (col. 1) and Runtime(col. 2) for the first (row 1) and second (row 2) task }
+	\label{plotGraphAll}
+\end{figure}
+All the trajectory displayed in the previous subsections were able to achieve the task, however the performances with and without dimension reduction are different, as shown with the runtime and total number of node in the tree in the figure \ref{plotGraphAll} for the first and second task. 
+As expected in this regards, both task display similar performance results.  It takes less time without reduction techniques because more joints configuration, whose poses are inside the full Soft-Envelope, are used to grow the tree than with the reduced Soft-Envelope. Indeed, the projected poses belongs more easily to the Soft-Envelope than to the reduced one since its gaussians are bigger, which is why the total number of nodes in the tree is in general bigger than the one with reduce dimension. 
 
 
 \section{Future Work}
-Next logical step: consider a second point of view ==> now only move according to the variance with the model skill ==> too dependent of the demonstraiton
-Integration of the sitaution view from different referential (kinect for example)==> analysis of the environment ==> if obstacle too tall, even if model variance is big, maybe not sampling in this area ? ... \\
-Basically Now it is still related to demonstration if demonstration fail to do so then done, integrate object to seize favorable direction.
-Orientation working or not ?  Need to see result to know how to shape this paragraph...
-Mettre article dans discussion pour possibilité d'amélioration:
-RealTimeRRT, RRTOptimalConnect,RRTx,Anytime RRT*
-Also used bi-RRT*: futur work
-
-futur work : possibility to improve the algorithm by making it possible to deal with dynamic environment with RRTx as suggested by Otte \textit{et al.} \cite{RRTx}
+In this work, we have presented an approach to generate trajectory with sampling-based planner which is more dependent on the skill model to find the correct direction to avoid obstacles. However, the model may not be fully representative of the direction to take in order to avoid obstacles depending on their form. The logical next step would be to integrate the environment, encapsulate the shapes and variances of the objects with a kinect for instance, with the variance of the model to calculate more precisely the best direction to take in order to avoid obstacles.
+An other direction of work could be to further modify the algorithm such that it could plan a trajectory with dynamic obstacles (as it is done by suggested by Otte \textit{et al.} \cite{RRTx} with its RRTx) 
 
 \section{Conclusion}
-In this paper, we have presented a trajectory planning combined with a learned skill from keyframes demonstration. The concept of Soft-Envelope was proposed to constrain the area between two keyframes gaussians in which an extension of the RRT*, PCTC-RRT*, was used to find a non-collision and available configuration space path linking two considered gaussians whose correspondent poses were around/inside the Soft-Envelope. The planner interleaves the exploration of C-space while being constrained in an area in workspace by using a double sampling process combined with gradient projection.
-The algorithm was successfully tested with two different task, showing the possible influence of the model when planning the motion. 
+We have presented a trajectory planner combined with a learned skill from keyframes demonstration. The concept of Soft-Envelope was proposed to constrain the area between two keyframes gaussians in which an extension of the RRT*, PCTC-RRT*, was used to find a non-collision and available configuration space path linking two considered gaussians whose correspondent poses were around/inside the Soft-Envelope. The planner interleaves the exploration of C-space while being constrained in an area in workspace by using a double sampling process combined with gradient projection and jacobian.
+The algorithm was successfully tested with two different tasks, showing the possible influences of the model to make the motion more coherent to the task. 
 
 \section{Acknowledgements}
 The authors would like to thank Aude Billard for making this joint research possible, Andrea L. Thomaz and Akgun Baris for the valuable time that they spent for help and discussions.
