@@ -28,6 +28,13 @@ Baris Akgun and Mike Stilman.
 Baris Akgun and Andrea~Lockerd Thomaz.
 \newblock Learning constraints with keyframes.
 
+\bibitem{KeyframesSelfImprovementLearning}
+Baris Akgun and Andrea~Lockerd Thomaz.
+\newblock Self-improvement of learned action models with learned goal models.
+\newblock In {\em 2015 {IEEE/RSJ} International Conference on Intelligent
+  Robots and Systems, {IROS} 2015, Hamburg, Germany, September 28 - October 2,
+  2015}, pages 5259--5264, 2015.
+
 \bibitem{refCKframes}
 Baris Andrey~Kurenkov, Akgun and Andrea~Lockerd Thomaz.
 \newblock An evaluation of gui and kinesthetic teaching methods for
@@ -42,7 +49,7 @@ Dmitry Berenson and Siddhartha Srinivasa.
   (ICRA '10)}, May 2010.
 
 \bibitem{Berenson_ConstraintManifold}
-Dmitry Berenson, Siddhartha Srinivasa, David {Ferguson }, and James Kuffner.
+Dmitry Berenson, Siddhartha Srinivasa, David Ferguson, and James Kuffner.
 \newblock Manipulation planning on constraint manifolds.
 \newblock In {\em IEEE International Conference on Robotics and Automation
   (ICRA '09)}, May 2009.
@@ -60,19 +67,6 @@ Dominik Bertram, James Kuffner, Ruediger Dillmann, and Tamim Asfour.
   redundant manipulators.
 \newblock In {\em Proceedings of the IEEE International Conference on Robotics
   and Automation}, pages 1874--1879. IEEE, May 2006.
-
-\bibitem{Calinon15}
-S.~Calinon.
-\newblock A tutorial on task-parameterized movement learning and retrieval.
-\newblock {\em Intelligent Service Robotics}, 2015.
-
-\bibitem{SylvainLearningGeneralizing}
-S.~Calinon, F.~Guenter, and A.~Billard.
-\newblock On learning, representing and generalizing a task in a humanoid
-  robot.
-\newblock {\em {IEEE} Transactions on Systems, Man and Cybernetics, Part {B}.
-  {S}pecial issue on robot learning by observation, demonstration and
-  imitation}, 37(2):286--298, 2007.
 
 \bibitem{ModelAndPRM}
 Gu~Ye Chris~Bowen and Ron Alterovitz.
@@ -165,12 +159,5 @@ Alexander~C. Shkolnik and Russ Tedrake.
 Mike Stilman.
 \newblock Navigation among movable obstacles.
 \newblock October 2007.
-
-\bibitem{Vandeweghe_2007_5981}
-J~Michael Vandeweghe, David {Ferguson }, and Siddhartha Srinivasa.
-\newblock Randomized path planning for redundant manipulators without inverse
-  kinematics.
-\newblock In {\em IEEE-RAS International Conference on Humanoid Robots},
-  November 2007.
 
 \end{thebibliography}

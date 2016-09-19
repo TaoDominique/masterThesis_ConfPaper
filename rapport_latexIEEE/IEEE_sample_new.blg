@@ -7,18 +7,21 @@ I was expecting a `,' or a `}'---line 303 of file bible.bib
  :    notes = "Differences from version published in ICRA 2009. Note: These changes have already been made to the PDF available on this site. 1. In algorithm 2, line 13 (q_s^old <- q_s) should be moved to line 8. (Thanks to Florian Steinhauser for catching this one) 2. Page 3, last paragraph. The sentence "
  :                                                                                                                                                                                                                                                                                                                  If the Constraint Config() function always returns true without modifying q_s ..." should be "If the ConstrainConfig() function always returns an unmodified q_s..." (Thanks to Mike Erdmann for catching this one) "
 I'm skipping whatever remains of this entry
+A bad cross reference---entry "PathPlanningIn1000"
+refers to entry "conf/icra/2009", which doesn't exist
 A bad cross reference---entry "RRTandLFD"
 refers to entry "conf/icra/2010", which doesn't exist
+A bad cross reference---entry "KeyframesSelfImprovementLearning"
+refers to entry "DBLP:conf/iros/2015", which doesn't exist
 A bad cross reference---entry "BarisRRT"
 refers to entry "conf/iros/2011", which doesn't exist
 A bad cross reference---entry "AdaptiveStepSizeNatGrad"
 refers to entry "conf/acml/2010", which doesn't exist
-A bad cross reference---entry "PathPlanningIn1000"
-refers to entry "conf/icra/2009", which doesn't exist
 Warning--I didn't find a database entry for "conf/iros/2011"
 Warning--I didn't find a database entry for "conf/icra/2010"
 Warning--I didn't find a database entry for "conf/icra/2009"
 Warning--I didn't find a database entry for "conf/acml/2010"
+Warning--I didn't find a database entry for "DBLP:conf/iros/2015"
 Too many commas in name 1 of "Dmitry Berenson, Siddhartha Srinivasa, Dave Ferguson, Alvaro Collet, James J. Kuffner" for entry Berenson_WGR
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Dmitry Berenson, Siddhartha Srinivasa, Dave Ferguson, Alvaro Collet, James J. Kuffner" for entry Berenson_WGR
@@ -39,45 +42,45 @@ Warning--empty institution in Lavalle98rapidly-exploringrandom
 Warning--empty journal in WhyAdaptiveGrad
 Warning--empty year in WhyAdaptiveGrad
 Warning--empty journal in RGD_RRT
-You've used 30 entries,
+You've used 28 entries,
             2118 wiz_defined-function locations,
-            685 strings with 9672 characters,
-and the built_in function-call counts, 9886 in all, are:
-= -- 955
-> -- 426
-< -- 9
-+ -- 171
-- -- 136
-* -- 625
-:= -- 1599
-add.period$ -- 91
-call.type$ -- 30
-change.case$ -- 158
+            676 strings with 9350 characters,
+and the built_in function-call counts, 9500 in all, are:
+= -- 925
+> -- 396
+< -- 10
++ -- 158
+- -- 126
+* -- 592
+:= -- 1512
+add.period$ -- 85
+call.type$ -- 28
+change.case$ -- 147
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 430
-empty$ -- 817
-format.name$ -- 136
-if$ -- 2127
+cite$ -- 40
+duplicate$ -- 420
+empty$ -- 789
+format.name$ -- 126
+if$ -- 2065
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 29
-newline$ -- 149
-num.names$ -- 62
-pop$ -- 203
+int.to.str$ -- 28
+missing$ -- 27
+newline$ -- 139
+num.names$ -- 58
+pop$ -- 193
 preamble$ -- 1
-purify$ -- 127
+purify$ -- 118
 quote$ -- 0
-skip$ -- 318
+skip$ -- 321
 stack$ -- 0
-substring$ -- 536
-swap$ -- 110
-text.length$ -- 9
+substring$ -- 540
+swap$ -- 119
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 120
+type$ -- 112
 warning$ -- 12
-while$ -- 87
-width$ -- 32
-write$ -- 309
-(There were 9 error messages)
+while$ -- 84
+width$ -- 30
+write$ -- 289
+(There were 10 error messages)

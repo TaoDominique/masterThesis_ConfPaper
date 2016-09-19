@@ -106,7 +106,7 @@ athomaz@ece.utexas.edu}\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-In the context of Keyframe-based Learning from Demonstration applied to robot manipulator, we present a framework for generating coherent trajectories with a sampling-based motion planning by using the principal direction of the constraints in the learned model. Our approach first constructs a geometric constraint of the space between two gaussians, that we call Soft-Envelope, to constrain the movement of the robot. Dimension reduction is used on the Soft-Envelope to extract important aspects from the learned skill. Then  we used our RRT* sampling-based motion planner to generate a trajectory  w.r.t to the Soft-Envelope by using a double sampling approach combined with a natural gradient descent projection and jacobian in order to interleave between C-space and workspace. The tree grows in C-space by only using samples inside a subset corresponding to the Soft-Envelope in workspace. \\
+In the context of Keyframe-based Learning from Demonstration applied to robot manipulator, we present a framework for generating trajectories with a sampling-based motion planning by using the principal direction of the constraints in the learned model. Our approach first constructs a geometric constraint of the space between two gaussians, that we call Soft-Envelope, to constrain the movement of the robot. Dimension reduction is used on the Soft-Envelope to extract important aspects from the learned skill. Then  we used our RRT* sampling-based motion planner to generate a trajectory  w.r.t to the Soft-Envelope by using a double sampling approach combined with a natural gradient descent projection and jacobian in order to interleave between C-space and workspace. The tree grows in C-space by only using samples inside a subset corresponding to the Soft-Envelope in workspace. \\
 Kinesthetic teachning is used to collect data from a real 6-DOF Kinova Jaco arm. The performance of our algorithm is then tested with the same robot in simulation. During the execution, new unseen obstacles are introduced to hinder the movement.
 \end{abstract}
 
@@ -124,7 +124,7 @@ A model of the skill is then constructed by clustering the keyframes in a statis
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[scale=0.245]{figure/kinesthetic_teaching.png}
+	\includegraphics[scale=0.2]{figure/kinesthetic_teaching.png}
 	\caption{A teacher using kinesthetic teaching with a 6-DOF Kinova Jaco arm to demonstrate a pouring water skill}
 	\label{Pic_kinesthetik_teaching}
 \end{figure}
@@ -147,28 +147,30 @@ Our motivation to use such an algorithm lies in its abilities to efficiently fin
 As we are interested in the completeness and optimality of RRT*, our planner uses a double sampling process in order to explore the C-space while trying to have its tree growing in the Soft-Envelope. Natural gradient descent and jacobian are used to switch between both spaces, enabling the creation of a series of projected points that we leverage to construct the tree in C-Space while trying to satisfy the constraints defined by the Soft-Envelope in workspace.\\
 
 \subsection{Related Works}
-Planning trajectories in the real world has always been a challenging task in robotics as for example executing the learned task in different environments.\\
- One way to create a path is to use a regression technique with a learned model of a skill as introduced by Sylvain \textit{et al.}  with the widely used GMM-GMR  w.r.t to a given environment \cite{SylvainLearningGeneralizing} (and more recently with TP-GMM as a new way to encode the data in \cite{Calinon15}) . A Similar work can also be found in \cite{refKeyframe1} by Baris \textit{et al.} using spline interpolation in a keyframes demonstration work. However, it often requires the same obstacles to be present during both the teaching and the execution of the task.\\
- Though our method also used a skill model to represent the constraints of the task, we used in addition an extended version of the RRT* to deal with obstacles. RRT* is an asymptotically optimal sampling-based motion planning algorithm introduced by Karaman \cite{KaramanRRTStar} which is a variation of RRT (Rapidly-exploring Random Trees)\cite{Lavalle98rapidly-exploringrandom} introduced by LaValle. During these past decades, a lot of literature have emerged around these two planners applied to robotics, as they allow to efficiently plan an end-to-end, collision-free trajectory in high-dimension.\\
-Even though they are not using the motion planner with LfD technique, Shkolnik \textit{et al.} proposed in \cite{PathPlanningIn1000} to grow a tree in task-space by direct sampling in this same space. Though it can achieve fast planning in very high dimension, the algorithm may not be complete because the grow of the tree is only done in workspace, ignoring the collision checking in C-space during the process.  The planner RRT-JT, proposed by Vandeweghe \textit{et al.} in \cite{Vandeweghe_2007_5981} is a nice alternative to explore the workspace while checking collision with a single tree that grows in C-space. It uses the jacobian to bias the growth of the tree toward a pose in workspace by calculating the least-square solution of the error pose.
- While RRT-JT is used to explore the workspace with direction biasing, it only uses a subset of the possible joints configuration given by the least-square solution possibly making it non complete. In our work, we are exploring the full C-space with our algorithm by using the jacobian combined with projection and sampling techniques. Though the growth of our tree is influence by the sample in workspace, enough to be constrained around an area, it is not bias toward the sample itself. \\
+While regression technique such as GMM-GMR (gaussian mixture regression) proposed by Calinon \textit{et al.} or spline interpolation in \cite{refKeyframe1} by Baris \textit{et al.} are used to generate trajectories from a encoded skill model, they often require the obstacles to be present in both the teaching and execution of the task. 
+One alternative to deal with obstacles is to use sampling-based motion planners to create an end-to-end trajectory such as the RRT or RRT*, which were respectively introduced by LaValle \cite{Lavalle98rapidly-exploringrandom} and  Karaman \cite{KaramanRRTStar} and created a lot of literature applied to robotics.
+
+ Shkolnik \textit{et al.} proposed in \cite{PathPlanningIn1000} to grow a tree in task-space by direct sampling in this same space. Though it can achieve fast planning in very high dimension, the algorithm may not be complete because the grow of the tree is only done in workspace, ignoring the collision checking in C-space during the process. \\
+%  The planner RRT-JT, proposed by Vandeweghe \textit{et al.} in \cite{Vandeweghe_2007_5981} is a nice alternative to explore the workspace while checking collision with a single tree that grows in C-space. It uses the jacobian to bias the growth of the tree toward a pose in workspace by calculating the least-square solution of the error pose.
+% While RRT-JT is used to explore the workspace with direction biasing, it only uses a subset of the possible joints configuration given by the least-square solution possibly making it non complete. In our work, we are exploring the full C-space with our algorithm by using the jacobian combined with projection and sampling techniques. Though the growth of our tree is influence by the sample in workspace, enough to be constrained around an area, it is not bias toward the sample itself. \\
  Berenson \textit{et al.} have done a lot of work, that have a lot in common with ours, with a single and (mainly) double complete RRT tree(s). In \cite{Berenson_WGR}, they introduced the concept of workspace goal region (WGR) to
 specify goal end-effector poses that are sampled inside. Then they used an IK solver to grow their double tree IKBiRRT in C-Space.
  Difficulties of the IK and Jacobian methods were also pointed out by Bertram \textit{et al.} in \cite{Bertram_2006_5436} who bypassed them by proposing a RRT that integrates the IK solution directly in the planner by adopting workspace heuristic functions that implicitly define goal regions of the configuration.
 In our work, we decided to use the jacobian instead of the IK solver, allowing our algorithm to be generalized for manipulator with more than 6 DOF where the IK solver might have  encountered problems with infinite solutions for a given pose.
 Berenson \textit{et al.} also work on a planner using projection technique such as in \cite{Berenson_ConstraintManifold} in which he projects a joint angles on a constrained manifold in C-space or with the  GradientT-RRT in \cite{Berenson_Gradient}, which searches toward lower cost regions to explore. The proof of completeness of RRT-based planner using sample-project method with Jacobian is given in \cite{Berenson_2010_6558}. Task Space Regions, along with workspace goal regions, are often used in order to represent the pose constraints for the projection in his sample-project method \cite{BerensonTSR}. An other variation of projection method used with an RRT planner was also proposed by  Mike Stilman in \cite{RGD_RRT} with its RGD(random gradient descent)-RRT. Unlike their methods which are mostly projection of the joint configuration onto some constrained manifold,  we are instead using a projection onto our constrained area in workspace with a double sampling and jacobian to guide the joint configuration in C-space.
 In addition, even though our constrained area can be related to their concept of Task-Space or Workspace goal region, the Soft-Envelope is more close to the representation of a prolate hyperspheroid area described in \cite{informedRRTStar} proposed by Gammell \textit{and al.} used to constrain sampling or to the Canal Space in \cite{CanalSpace} proposed by Chernova \textit{et al.}mused to encode demonstrations in order to learn a skill model.\\
-Other work that combined Learning from demonstration ideas with sampling-based planning performance was done by Jonathan Classens in  \cite{RRTandLFD}, in which he used a RRT with a model learned with GMM from trajectory data collected with kinesthetic teaching. The gaussians of the model are used for direct sampling in workspace and an IK solver is used to grow the Tree in Cspace. Bowen \textit{et al.} in \cite{ModelAndPRM} also proposed a method using PRM, an equivalent planner as RRT, with a model skill encoded by clusters motion features which are a similar concept as the keyframes clusters.\\
-Dimension reduction is also used to encapsulate the variation of the data to help our planner to create a more coherent trajectory w.r.t the learned task. To the best of our knowledge, only a few work have been done using dimension reduction method with a sampling-based planner.  
-In \cite{balancing_statespace_coveragePCA} proposed by Yanbo \textit{et al.}, PCA is executed on all the nodes of the tree to bias its expansion toward the principal dimensions that the RRT algorithm would least explore. A similar work was done by Dalibard \textit{et al.} in \cite{PCARRT2}, in which he used PCA applied on the nodes of the RRT tree in order to find the random direction towards which the roadmap is extended. This technique is used to influence the generation of the new sample, favoring the direction along which the variance of the roadmap is high. Rosell \textit{et al.} also used PCA in \cite{PCA_PRM} over all the samples of the PRM to enlarge the probability of finding collision-free samples
-in difficult regions of the C-space with low clearance.
- In our work, we use eigenvalues and eigenvectors decomposition on all the gaussians of the Soft-Envelope to determine where the variance is supposedly high along the constrained area. This new reduced area will then be used for sampling.
+Work similar as ours in the sense that it combines Learning from demonstration ideas with sampling-based planner was done by Jonathan Classens in  \cite{RRTandLFD}, in which he used a RRT with a model learned with GMM from trajectory data collected with kinesthetic teaching. The Gaussians of the model are used for direct sampling in workspace and an IK solver is used to grow the Tree in Cspace. Bowen \textit{et al.} in \cite{ModelAndPRM} also proposed a method using PRM, an equivalent planner as RRT, with a model skill encoded by clusters motion features which are a similar concept as the keyframes clusters.\\
+Another body of work have been done combining PCA dimension reduction method with a sampling-based planner to bias the RRT planner toward directions which it would not normally explore \cite{balancing_statespace_coveragePCA} or to favor the direction along which the roadmap tree is high \cite{PCARRT2}. PCA is also used with PRM planner to influence the sampling into difficult regions with low clearance in C-space \cite{PCA_PRM}. In our work, we use eigenvalues/vectors-decomposition to influence sampling and the RRT tree growth along the principal component of each Gaussian used to create our constrained manifold in workspace.
 
-\section{Method Analysis}
-In the following section, we will briefly consider how the model is learned from keyframes data demonstration. This model will provide as an output an ordered sequence of multivariate gaussians to recreate the skill. The algorithm, presented in the next sections, will be used by only considering two connected gaussians from the given sequence to create a local trajectory, respectively named the "parent" and "child" gaussian. The full trajectory used to recreate the task can easily be generated by combining all the local trajectories together.
-\\
-Let $\mb{q} \in \mathbb{R}^{M \times 1}$ a joint configuration in C-Space of dimension $M$  and $\mb{p} \in \mathbb{R}^{N \times 1}$ a pose in workspace of dimension $N$. $\mb{\Sigma}_{p} , \mb{\Sigma}_{c} \in \mathbb{R}^{N \times N}$  and $\mb{\mu}_{p} , \mb{\mu}_{c} \in \mathbb{R}^{N \times 1}$ respectively the covariance and center of the parent and child gaussian.\\
-The different parts of the algorithm that will be explained are mainly summarized in the pseudo-code of algorithm \ref{planning}. 
+
+\section{Method}
+After collecting keyframes data (joint configuration and its corresponding pose) from kinesthetic teaching, the model is learned by using a HMM which gives as an output an order sequence of multivariate Gaussians to reproduce the skill as explained in \cite{KeyframesSelfImprovementLearning}.
+ At each time, our method is used on only two connected Gaussians from the given state sequence to construct a local trajectory, going respectively from what we called the "parent" to the "child" Gaussian. The full trajectory used to recreate the task can easily be generated by combining all the local trajectories together.
+The different parts of the algorithm are summarized in the pseudo-code of algorithm \ref{planning}. \\
+
+Let $\mb{q} \in \mathbb{R}^{M \times 1}$ a joint configuration in C-Space of dimension $M$  and $\mb{p} \in \mathbb{R}^{N \times 1}$ a pose in workspace of dimension $N$. $\mb{\Sigma}_{p} , \mb{\Sigma}_{c} \in \mathbb{R}^{N \times N}$  and $\mb{\mu}_{p} , \mb{\mu}_{c} \in \mathbb{R}^{N \times 1}$ are respectively the covariance and center of the parent and child gaussians.
+The parameter $\alpha$ is used as the percentage of the data to be represented in the dimension reduction technique. The joint vector $\mb{q}_{start}$, with $\mb{p}_{start}$ its corresponding pose in workspace, is either the initial configuration of the robot or the last joint of the local trajectory solution from the previous pair of gaussians. \\
+
 \begin{algorithm}[H]
  \caption{Planning($\mb{\Sigma}_p,\mb{\mu}_p,\mb{\Sigma}_c,\mb{\mu}_c,\alpha$)}\label{planning}
 
@@ -178,8 +180,7 @@ The different parts of the algorithm that will be explained are mainly summarize
 \Output{Local trajectory from parent to children gaussian}
 \BlankLine
 \setcounter{AlgoLine}{0}
-$V \leftarrow \{
-\mb{q}_{start}\}$;
+$[Q_q,Q_p] \leftarrow \mb{q}_{start},\mb{p}_{start}$;
 
 $E \leftarrow \emptyset$;
 
@@ -195,32 +196,27 @@ $\mb{\Sigma}_{redEnvSet} \leftarrow$ Reduced\_Soft\_Envelope($\mb{\Sigma}_{envSe
 PCTC\_RRTStar($G$,$\mb{\Sigma_{envSet}}$,$\mb{\Sigma_{redEnvSet}}$,$\mb{\mu_{envSet}}$, $\alpha$);
 
 \end{algorithm}
-For our variation of the RRT* algorithm, we have $T=(Q,E,Q_{sol})$ with $Q \subset Q_{free}$ the set of all vertices in C-space, the edges $E \subset Q_{free} \times Q_{free}$ and $Q_{sol}$ the set of joints configuration inside the child gaussian, used to indicate that a path is found. The set $Q$ is actually a double set $Q_q$ and $Q_p$ which respectively store the joint configuration used to grow the tree in C-space and also its pose in workspace. $\alpha$ is a parameter used as the percentage of data to be represented in the dimension reduction technique. $\mb{q}_{start}$ is either the initial joint configuration of the robot or the last joint of the local trajectory solution from the previous pair of gaussians. 
+For our variation of the RRT* algorithm, we used  $T=(Q,E,Q_{sol})$ with $Q \subset Q_{free}$ the set of all vertices in C-space, the edges $E \subset Q_{free} \times Q_{free}$ and $Q_{sol}$ the set of joints configuration inside the child gaussian, used to indicate that a path is found. The set $Q$ is a double set $Q_q$ and $Q_p$ which respectively store the joint configuration used to grow the tree in C-space and also its corresponding pose in workspace. 
 
-\subsection{Learning - Clustering}
-Should I write it, will probably refer to one paper and quickly write down how I cluster in a simple way the keyframes...
-This paper suppose to show the trajectory creation so USELESS TO WRITE THAT MUCH HERE
-Simple reference a comment j'ai encoder les trajectoire avec k-mean initialisation et E-M  (for chaque keyframes ==> variance is better encapsulated)
-RESULTAT:
-give back a simple 
 \subsection{Calibration}
 \subsubsection{Child and Parent Gaussian}\leavevmode\par
-For a given initial pose $\mb{p}_{init}$ of the robot arm, the first step is to know which pair of connected clusters to consider as parent and child gaussian for our planner.\\
-We calculate the euclidean distance from $p_{init}$ to each center of all the gaussians from the given sequence and then select the gaussian $G^s$ that gives the minimal distance.
-Since $G^{s}$ is from a sequence of ordered gaussians, it is at least connected to a previous $G^{s-1}$ and next gaussian $G^{s+1}$.  The euclidean distances from the pose $p_{init}$ to the center of $G^{s-1}$ and $G^{s+1}$, $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s-1}}}}$ and $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s+1}}}}$, are then calculated and compared to see which gaussian is to be paired with $G^s$ for the first used of algorithm \ref{planning}.\\
-If $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s-1}}}}$ is smaller, then $G^{s-1}$ becomes the parent and $G^{s}$ the child gaussian (the same logic with  $G^{s}$ becoming the parent and $G^{s+1}$ the child gaussian if $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s+1}}}}$ was smaller).\\
+For a given initial pose $\mb{p}_{init}$ of the end-effector, the first step is to know which pair of connected Gaussians to consider as parent and child for our planner.\\
+We calculate the euclidean distance from $\mb{p}_{init}$ to each Gaussians center of the given state sequence and then select the Gaussian $G^s$ that gives the minimal distance.
+Since $G^{s}$ is from a sequence of ordered Gaussians, it is at most connected to a previous $G^{s-1}$ and next Gaussian $G^{s+1}$.  The euclidean distances from the pose $p_{init}$ to the center of $G^{s-1}$ and $G^{s+1}$, $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s-1}}}}$ and $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s+1}}}}$, are then calculated and compared to see which gaussian is to be paired with $G^s$ for the first used of algorithm \ref{planning}.\\
+If $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s-1}}}}$ is smaller, then $G^{s-1}$ becomes the parent and $G^{s}$ the child Gaussian (the same logic with  $G^{s}$ becoming the parent and $G^{s+1}$ the child Gaussian if $\norm{\overrightarrow{\mb{p_{init}}\mb{\mu^{s+1}}}}$ was smaller).\\
 
 \subsubsection{Soft-Envelope}\leavevmode\par
-Since the skill is only encoded by a sparse set of keyframes multivariate gaussians in workspace, there is no telling how the arm end-effector should move between two clusters, especially when using a sampling-based motion planner which constructs a trajectory by sampling the space.\\
-In order to constrain the motion between two considered multivariate gaussians, we introduced a constructed zone in-between them. However, our intention is not to have a hard-constraint of the motion of the end-effector, but most likely a region inside which we would like its trajectory to be, which is why we called it "Soft-Envelope" as shown in figure \ref{MixSoftEnvelope}.
+In a keyframe-based learning from demonstration, the skill is only encoded by a sparse set of keyframes Gaussians in workspace and hence there is no telling how the end-effector should move between two clusters, especially when using a sampling-based motion planner which constructs a trajectory by sampling the space.\\
+We introduce a constrained area between two considered Gaussians with the intention of having a region inside which we would like the motion of the end-effector to be, which is why we called it "Soft-Envelope". A representation is shown in figure \ref{MixSoftEnvelope}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.23]{figure/MixSoftEnvelope.png}
 	\caption{Representation of the Soft-Envelope in 2D and 3D}
 	\label{MixSoftEnvelope}
 \end{figure}
-
-The construction of the Soft-Envelope is done by linear interpolation of parent/child covariance matrices and centers as shown in the following equations: 
+\\
+It is also used as a sampling region to guide the creation of the trajectory. In fact, only sampling inside the "child" Gaussian, depending on its size, may not be enough to efficiently grow an end-to-end path in presence of obstacles and sampling in the full C-space of the arm may lead the trajectory away from its goal.\\
+The Soft-Envelope is created by linear interpolation of the parent/child covariance matrices and centers as shown in the following equations: 
 \begin{subnumcases}{}
 			 \mb{\mu_{env}}^{0}= \mb{\mu_{p}}  \\
 			 \mb{\Sigma_{env}}^{0}=\mb{\Sigma_{p}}\\
@@ -230,74 +226,36 @@ The construction of the Soft-Envelope is done by linear interpolation of parent/
 \end{subnumcases}
 with $\mb{\mu_{env}}^i \in \mathbb{R}^{N \times 1}$ and $\mb{\Sigma_{env}}^i \in \mathbb{R}^{N \times N}$ the center and covariance matrix of the $i^{th}$ gaussian of the Soft-Envelope. We define $\mb{\Sigma_{envSet}}$ the set of all the calculated matrices $\mb{\Sigma_{env}}$ forming the Soft-Envelope and $\mb{\mu_{envSet}}$ the set of all $\mb{\mu_{env}}^i$ .\\ 
  Though the coefficient $\triangle d $ can be chosen as a result of a function with respect to the euclidean distance of the two center ${\norm{\overrightarrow{\mb{\mu}_p\mb{\mu}_c}}}$ , we decided instead to use a small number (w.r.t. the biggest and smallest distance between two linked gaussians in the model) since not all pair of gaussians in the model are evenly separated.\\
- 
+Furthermore, the Soft-Envelope can automatically be adapted to any pair of Gaussians and has the advantage of being easily an uniformly sampled since it is only composed of a series of Gaussians (see section \ref{samplingSection}).\\
+
 \subsubsection{Reduced Soft-Envelope}\leavevmode\par \label{ReducedSoftEnvelope}
-The Soft-Envelope can also be used to encapsulate the direction with the biggest variance in each of its gaussians by using a eigenvector and eigenvalues decomposition technique, creating a "Reduced-Soft-Envelope" in full workspace. The idea is to have the end-effector move along these directions as they correspond to the linear transition between the parent and child gaussians. Furthermore, sampling will also be performed inside the (Reduced) Soft-Envelope in order to guide the creation of the trajectory.\\
-The procedure is illustrated in algorithm \ref{AlgoRedSoftEnve}.\\
+As the variance of a Gaussian in the model can be interpreted as the intention of the user when the skill was demonstrated, the Soft-Envelope is also used as a way to influence the end-effector in the direction it should first try to move, w.r.t to the variance of its Gaussians, in order avoid any obstacles. For this goal, the idea is to encapsulate the direction with the biggest variances in each of its Gaussians by using a eigenvalues/vectors decomposition technique, creating  a "Reduced-Soft-Envelope" in full workspace that we used instead of the Soft-Envelope. \\
+As a fact, one has first to remember that only the parent and the child Gaussians of the model truly represent the variance allowed for the task, the Soft-Envelope being just one linear interpretation of the variations should evolve between these two. Hence, our first step will be to use eigenvalue decomposition separately on the child and parent Gaussians to determine the number of eigenvector needed to represent $\alpha \%$ of the data, with $\alpha$ a parameter specified by the user. We compare them and take the biggest number of eigenvector as $N_{eig}$. \\
+ Each of the Soft-Envelope Gaussians covariance matrix $\mb{\Sigma}_{env}^i \in \mathbb{R}^{N \times N}$  are then decomposed into a full eigenvector matrix $\mb{V}^{i} \in \mathbb{R}^{N \times N}$ and diagonal eigenvalue matrix $\mb{D}^{i} \in \mathbb{R}^{N \times N}$. The reduced  matrix $\mb{V}_{red}^{i}\in \mathbb{R}^{N \times N_{eig}}$ and $\mb{D}_{red}^{i} \in \mathbb{R}^{N_{eig} \times N_{eig}}$ are created by using the $N_{eig}$ biggest eigenvectors and associated eigenvalues.\\
+The full reduced covariance matrix from $\mb{\Sigma}_{env}^{i}$ is finally calculated with $\mb{\Sigma}_{red}^{i} =\mb{V}_{red}^{i} \mb{D}_{red}^{i}  (\mb{V}_{red}^{i})^{\psin}$, such that $\mb{\Sigma}_{red}^{i}  \in \mathbb{R}^{N \times N} $  is the covariance matrix of the $i^{th}$ Gaussian of the Reduced Soft-Envelope. Each new reduced covariance matrix belongs to the set $\mb{\Sigma}_{redEnvSet}$. A visual representation is shown in figure \ref{100vs90EnvOnly}.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.17]{figure/100vs90EnvOnly.png}
+	\caption{Representation of (left image)the Soft-Envelope ($\alpha = 100$) and (right image) Reduced-Soft-Envelope($\alpha = 90$)}
+	\label{100vs90EnvOnly}
+\end{figure}
+
+One particular aspect to be cautious with the reduced Soft-Envelope is to make sure that its Gaussians are still semi-positive definite because they will be used later to calculate a quadratic distance (Mahalanobis distance). In fact, $\mb{\Sigma}_{red}^{i}$ being calculated by approximation of eigenvectors and eigenvalues matrices can have approximation of very small values making it just not positive definite.\\ One way to correct this problem is to use the method introduced by Higham in \cite{Nearest_PSDMATRIX} to calculate the nearest symmetric semi-definite positive matrix that we can combine with a Tikhonov regularization using the smallest eigenvalue until the matrix is positive definite as shown in algorithm \ref{ThikoRegu}.
 \begin{algorithm}[H]
- \caption{Reduced\_Soft\_Envelope($\mb{\Sigma}_{envSet}$,$\mb{\Sigma}_{p}$,$\mb{\Sigma}_{c}$, $\alpha$)}\label{AlgoRedSoftEnve}
-
-\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
-\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
-\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
-\Output{All $\mb{\Sigma}_{red}^i$ of the Reduced Soft-Envelope ($\mb{\Sigma}_{redEnvSet}$ the set of all $\mb{\Sigma}_{red}^i$)}
-\BlankLine
- \setcounter{AlgoLine}{0}
-
-\emph{//Number of eigenvector $N_{eig}$ to represent $\alpha\%$ of the data}\;
-
-$N_{eigP}$ $\leftarrow$ Extract\_N\_EigenDecomp($\mb{\Sigma_{p}}$, $\alpha$);\;
-
-$N_{eigC}$ $\leftarrow$ Extract\_N\_EigenDecomp($\mb{\Sigma_{c}}$, $\alpha$);\;
-
-\lIf{ $N_{eigC}$ $<$ $N_{eigP}$}{$N_{eig} = N_{eigP}$}\lElse{$N_{eig} = N_{eigC}$}{}
-\BlankLine
-
-\emph{//Reduced Soft-Envelope}\;
-
-
-\For{$i\leftarrow $ 1 \KwTo size($\mb{\Sigma_{envSet}}$)}
-{ 
-	$[\mb{V}^i,\mb{D}^i] \leftarrow$ Eigen\_Decomp($\mb{\Sigma}_{env}^i$); \;
-	
-	$[\mb{V}_{red}^{i},\mb{D}_{red}^{i}] \leftarrow$ Reduce\_Mat($\mb{V}^i,\mb{D}^i,N_{eig}$);\;
-	
-	 $\mb{\Sigma}_{red}^{i} =\mb{V}_{red}^{i} \mb{D}_{red}^{i}  (\mb{V}_{red}^{i})^{\psin}$;\;
-	\BlankLine
-	\emph{//Calculate nearest positive definite matrix (Higmam method) and regularization }\;
-	
-	$\mb{\Sigma_{red}}^{i} \leftarrow$  Nearest\_PDMat($\mb{\Sigma}_{red}^{i}$);\;
-	\BlankLine
-	$\lambda_{Smallest} \leftarrow$ Eigen\_Decomp($\mb{\Sigma}_{red}^{i}$);\; 
-	
+ \caption{Tikhonov regularization}\label{ThikoRegu}
 	k=0 and $\epsilon= FLT\_EPSILON $;
 	
 	\While{$\lambda_{Smallest}<0$}{
 	
 		k++;
 		
-		$\mb{\Sigma_{red}}^{i}$=	$\mb{\Sigma_{red}}^{i} + (-EigVal_{Smallest} \times k^2 + \epsilon) \times \bf{I}$;
+		$\mb{\Sigma_{red}}^{i}$=	$\mb{\Sigma_{red}}^{i} + (-\lambda_{Smallest} \times k^2 + \epsilon) \times \bf{I}$;
 	}
-}
 \end{algorithm}
 
-As a fact, one has to remember that only the parent and the child gaussians of the model truly represent the variance allowed for the task, the Soft-Envelope being just one interpretation of how the movement should be between these two. Hence, our first step will be to use eigenvalue decomposition on the child and parent gaussians to determine the biggest number of eigenvector $N_{eig}$ needed to represent $\alpha \%$ of the data, with $\alpha$ a parameter specified by the user (line 1-5). \\
-We then decompose each of the Soft-Envelope gaussians covariance matrix $\mb{\Sigma}_{env}^i \in \mathbb{R}^{N \times N}$  in order to get a full eigenvector matrix $\mb{V}^{i} \in \mathbb{R}^{N \times N}$ and diagonal eigenvalue matrix $\mb{D}^{i} \in \mathbb{R}^{N \times N}$. We form the reduced  matrix $\mb{V}_{red}^{i}\in \mathbb{R}^{N \times N_{eig}}$ and $\mb{D}_{red}^{i} \in \mathbb{R}^{N_{eig} \times N_{eig}}$  by using the $N_{eig}$ biggest eigenvectors and associated eigenvalues in order to represent $\alpha \%$ of the data.
-The full reduced covariance matrix from $\mb{\Sigma}_{env}^{i}$ is finally calculated with $\mb{\Sigma}_{red}^{i} =\mb{V}_{red}^{i} \mb{D}_{red}^{i}  (\mb{V}_{red}^{i})^{\psin}$, such that $\mb{\Sigma}_{red}^{i}  \in \mathbb{R}^{N \times N} $  is the covariance matrix of the $i^{th}$ gaussian of the Reduced Soft-Envelope (line 6-10). Each new reduced covariance matrix belongs to the set $\mb{\Sigma}_{redEnvSet}$. A visual representation is shown in figure \ref{100vs90EnvOnly}.
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.21]{figure/100vs90EnvOnly.png}
-	\caption{Representation of (left image)the Soft-Envelope ($\alpha = 100$) and (right image) Reduced-Soft-Envelope($\alpha = 90$)}
-	\label{100vs90EnvOnly}
-\end{figure}
-
-
-One particular aspect to be cautious with the gaussians of the Reduced Soft-Envelope is to make sure that they are still semi-positive definite. In fact, $\mb{\Sigma}_{red}^{i}$ being calculated by approximation of eigenvectors and eigenvalues matrices can have approximation of very small values making it just not positive definite. Since they will be later used to calculate a quadratic distance (Mahalanobis distance), it is important to have them positive definite.\\
-One way to correct this problem is to use the method introduced by Higham in \cite{Nearest_PSDMATRIX} to calculate the nearest symetric semi-definite positive matrix that we can combine with a Tikhonov Regularizazion using the smallest eigenvalue if the matrix is still not positive definite (line 12-18).
-
 \subsection{PCTC-RRT*} 
-Since we are using a projection method and double sampling in both the  task-space and C-space,  we decided to name our algorithm PCTC-RRT* (Projection in Constrained Taskspace/CSpace-RRT*). PCTC-RRT* is an extension of the RRT*, ie it uses the same structure as an RRT* with some minor modification (see subsection \ref{coreRRTstarChapter}). The work was more focus on how the sampling needed to be considered w.r.t to the Soft-Envelope. The pseudo-code of the procedure is presented in the algorithm \ref{PCTCRRT}.\\
+Our sampling-based planner is an extension of the RRT*. The work has been more focus on how the sampling, w.r.t the (reduced) Soft-Envelope, should be consider in order to influence the trajectory (see subsection \ref{coreRRTstarChapter}). The work was more focus on how the sampling needed to be considered w.r.t to the Soft-Envelope. The pseudo-code of the procedure is presented in the algorithm \ref{PCTCRRT}.\\
 Our objective is to grow a single Tree in C-space while trying to be constrained inside the Soft-Envelope. For that purpose, we use a double sampling, one sample in each space, that we combined with a natural gradient descent projection.
 The first sampling $\mb{p}_{sRef}$ (line 3) is done inside the Soft-Envelope in Workspace. It is then used as the reference sampling pose on which $\mb{p}_s^j$ is projected, where $\mb{p}_s^j$ is the corresponding pose of the second sample $\mb{q}_s$ (line 7-8).
 
@@ -321,7 +279,7 @@ New vertices and edges are added to $G=(Q_q,Q_p,E,Q_{sol})$ by growing the tree 
  We also changed the condition to tell when a path is found (line 22-27). When a new node $\mb{q}_{New}$ in C-space is added to the Tree, we use its corresponding pose $\mb{p}_{New}$ (found with forward kinematic and added to $Q_p$) to calculate the mahalanobis distance to the children gaussian and evaluate its belonging. If we have $(\mb{p}_{New}-\mb{\mu}_{c}^i)^{\trsp}(\mb{\Sigma}_{c}^i)^{-1} ((\mb{p}_{New}-\mb{\mu}_{c}^i)) < criteria$ (with the value for criteria as discuted just above), then a solution path from the parent to the child gaussian  is found (line 25). We can either directly update the next pair of parent/child gaussian in order to plan for the next new local trajectory or continue the sampling to find a more optimal path until the allowed time is reached or any other criterias specified by the user is met (local biasing can also be added to algorithm \ref{SoftEnv_Sampling} once a path is found as suggested by Baris \textit{and al.} in \cite{BarisRRT} in order to focus the sampling more around the best solution path)  \\
  
 
-\subsubsection{Sampling}\leavevmode\par
+\subsubsection{Sampling}\leavevmode\par \label{samplingSection}
 The sampling that was done inside the Soft-Envelope follows the procedure illustrated by the pseudo-code in algorithm \ref{SoftEnv_Sampling}.
 We use a goal biasing heuristic to sample inside the child gaussian, which can drastically change the planning speed (line 2-4). In that case, the covariance matrix used to generate samples inside the child gaussian is just $\mb{\Sigma}_c$. Otherwise we sample uniformly inside the Soft-Envelope (line 4-9).  First, we randomly select a point on the axis connecting the center of the parent and child gaussian. This pose, $\mb{p}_{sel}$, is then used in the function {\fontfamily{qcr}\selectfont Gauss\_Lin\_Interpol($\mb{p}_{sel}$)} to calculate the covariance matrix $\mb{\Sigma}_{sel}$  of the envelope gaussian with $\mb{p}_{sel}$ as its center.\\
 In fact, {\fontfamily{qcr}\selectfont Gauss\_Lin\_Interpol($\mb{p}_{sel}$)} performs the same linear interpolation of the covariance matrix as in equation \ref{equaInterCov} with $\Delta d = \norm{\overrightarrow{\mb{\mu}_p\mb{\mu}_{sel}}}/{\norm{\overrightarrow{\mb{\mu}_p\mb{\mu}_c}}}$, with $\mb{\mu}_{sel} = \mb{p}_{sel}$. Limitations of the estimation of the calculation is also set by using the unit vector $\overrightarrow{\mb{U}_{\mb{\mu}_p\mb{\mu}_{c}}} = \overrightarrow{\mb{\mu}_p\mb{\mu}_{c}}/\norm{\overrightarrow{\mb{\mu}_p\mb{\mu}_{c}}}$: in case we have $\overrightarrow{\mb{U}_{\mb{\mu_{sel}}\mb{\mu_{c}}}} \neq \overrightarrow{\mb{U}_{\mb{\mu}_p\mb{\mu_{c}}}} $, then it means that the center $\mu_{sel}$ is not in-between the two considered gaussians, ie it is outside from the perspective of the child gaussian, thus the covariance and center are set such as $\mb{\Sigma}_{sel}=\mb{\Sigma}_c$ and $\mb{\mu}_{sel}=\mb{\mu}_c$; in case of $\overrightarrow{U_{\mb{\mu}_{p}\mb{\mu}_{sel}}} \neq \overrightarrow{U_{\mb{\mu}_p\mb{\mu_{c}}}} $, then the center $\mu_{sel}$ is outside from the perspective of the parent gaussian, thus we have $\mb{\Sigma}_{sel}=\mb{\Sigma}_p$ and $\mb{\mu}_{sel}=\mb{\mu}_p$.\\
@@ -567,9 +525,9 @@ $\mb{q}_{New} \leftarrow$ Steer($\mb{q}_{Nearest},\mb{q}$);
 \end{algorithm}
 
 \section{Experiments}
-We first kinesthetic teaching with a real 6-dof Kinova Jaco arm mounted on a robot platform (figure \ref{Pic_kinesthetik_teaching})to collect keyframes data and a simulated robot in simulation to emulate its behavior and get results.\\
+We first use kinesthetic teaching with a real 6-dof Kinova Jaco arm mounted on a robot platform (figure \ref{Pic_kinesthetik_teaching}) to collect keyframes data and a simulated robot in simulation to emulate its behavior and obtain results.\\
 We then evaluated our algorithm with Moveit-Rviz simulator. The program is used as an input for our algorithm written in C++. The behavior of the robot arm was tested with 2 different tasks. The setup for each of them was with a 0.61m x 1.22m x 0.73m table on which were disposed different objects from the YCB set. Simulation was done on a Lenovo computer with  a Intel Core i7-5600U CPU 2.60GHz × 4 processor and Nvidia GeForce 940M graphic card.\\
- The initial configuration of the arm is placed above the table with its end-effector inside the first gaussian. We tested our algorithm with 2 simple tasks whose skill models, learned with 7 successful demonstrations, are only encoded with two gaussians.  Moreover, in the next figures, the parent gaussian is in red and the child one is in blue. Moreover, for each task, the algorithm was run 7 times, with dimension reduction of $\alpha = 85 \%$ and without it.\\
+ The initial configuration of the arm is placed above the table with its end-effector inside the first gaussian. We tested our algorithm with 2 simple tasks whose skill models, learned with 7 successful demonstrations, are only encoded with two gaussians.  Moreover, in the next figures, the parent gaussian is in red and the child one is in blue. For each task, the algorithm was run 7 times, with dimension reduction of $\alpha = 85 \%$ and without it.\\
   Our objective is to show how our algorithm with dimension reduction influences the generation of an end-to-end trajectory w.r.t to the Soft-Envelope while finding the correct direction to avoid the obstacle. For the two tasks, we stop the planner once a first path is found, better optimal solutions could have been found by letting the algorithm run longer.
 
 \section{Results}
@@ -577,7 +535,7 @@ We then evaluated our algorithm with Moveit-Rviz simulator. The program is used 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.22]{figure/task1Scenario.png}
-	\caption{Setup of the task 1}
+	\caption{Setup of the task 1: a plastic wine glass and a Cheez-it box on the table}
 	\label{task1Scenario}
 \end{figure}
 The task is to have the end-effector, that is holding a small object(cherry fruit), go above a wine glass and release its gripper to drop the object inside. For the motion planning, a Cheez-It box is used to obstruct the arm movement as shown in figure \ref{task1Scenario}. The skill of the model in figure \ref{trajectoriesTask1} shows that the end-effector has a lot of variance in the z direction above the glass. In this task, our objective is to show how our algorithm with dimension reduction influences the trajectory generation even though the direction with the most variance is already clearly display by the gaussian. Results of the generated trajectories are pictured in figure \ref{trajectoriesTask1} \\
@@ -592,7 +550,7 @@ We can clearly see that all the trajectories with dimension reduction first foll
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.2]{figure/task2Scenario.png}
-	\caption{Setup of task 2}
+	\caption{Setup of task 2: a plate and a coffee can on the table}
 	\label{task2Scenario}
 \end{figure}
 The setup in task 2 is pictured in figure \ref{task2Scenario} in which we used the coffee can in the middle to hinder the motion. Unlike the model of task 1, this one, displayed in figure \ref{task2ModelGaussian}, show gaussians whose principal directions are less visible. The objective in this task is to show how that, with less obvious gaussians (could be from user focusing on completing the task instead of giving good demonstrations), our algorithm will still encapsulate and use these directions to influence the creation of trajectory.
