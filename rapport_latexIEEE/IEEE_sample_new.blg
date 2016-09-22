@@ -4,14 +4,12 @@ The top-level auxiliary file: IEEE_sample_new.aux
 The style file: plain.bst
 Database file #1: bible.bib
 I was expecting a `,' or a `}'---line 303 of file bible.bib
- :    notes = "Differences from version published in ICRA 2009. Note: These changes have already been made to the PDF available on this site. 1. In algorithm 2, line 13 (q_s^old <- q_s) should be moved to line 8. (Thanks to Florian Steinhauser for catching this one) 2. Page 3, last paragraph. The sentence "
+ :    Notes = "Differences from version published in ICRA 2009. Note: These changes have already been made to the PDF available on this site. 1. In algorithm 2, line 13 (q_s^old <- q_s) should be moved to line 8. (Thanks to Florian Steinhauser for catching this one) 2. Page 3, last paragraph. The sentence "
  :                                                                                                                                                                                                                                                                                                                  If the Constraint Config() function always returns true without modifying q_s ..." should be "If the ConstrainConfig() function always returns an unmodified q_s..." (Thanks to Mike Erdmann for catching this one) "
 I'm skipping whatever remains of this entry
-A bad cross reference---entry "PathPlanningIn1000"
-refers to entry "conf/icra/2009", which doesn't exist
 A bad cross reference---entry "RRTandLFD"
 refers to entry "conf/icra/2010", which doesn't exist
-A bad cross reference---entry "KeyframesSelfImprovementLearning"
+A bad cross reference---entry "KeyframesSelfLearning"
 refers to entry "DBLP:conf/iros/2015", which doesn't exist
 A bad cross reference---entry "BarisRRT"
 refers to entry "conf/iros/2011", which doesn't exist
@@ -19,68 +17,69 @@ A bad cross reference---entry "AdaptiveStepSizeNatGrad"
 refers to entry "conf/acml/2010", which doesn't exist
 Warning--I didn't find a database entry for "conf/iros/2011"
 Warning--I didn't find a database entry for "conf/icra/2010"
-Warning--I didn't find a database entry for "conf/icra/2009"
 Warning--I didn't find a database entry for "conf/acml/2010"
 Warning--I didn't find a database entry for "DBLP:conf/iros/2015"
-Too many commas in name 1 of "Dmitry Berenson, Siddhartha Srinivasa, Dave Ferguson, Alvaro Collet, James J. Kuffner" for entry Berenson_WGR
+Too many commas in name 1 of "A. S. Phung, J. Malzahn, F. Hoffmann, T. Bertram" for entry PotentialField
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Dmitry Berenson, Siddhartha Srinivasa, Dave Ferguson, Alvaro Collet, James J. Kuffner" for entry Berenson_WGR
 while executing---line 1049 of file plain.bst
-Warning--empty journal in refKeyframe0
-Warning--empty journal in refKeyframe2
-Warning--empty year in refKeyframe2
-Warning--empty journal in refCKframes
+Too many commas in name 1 of "Dmitry Berenson, Siddhartha Srinivasa, Dave Ferguson, Alvaro Collet, James J. Kuffner" for entry Berenson_WGR
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "A. S. Phung, J. Malzahn, F. Hoffmann, T. Bertram" for entry PotentialField
+while executing---line 1090 of file plain.bst
+Warning--empty journal in PotentialField
+Warning--empty year in PotentialField
 Too many commas in name 1 of "Dmitry Berenson, Siddhartha Srinivasa, Dave Ferguson, Alvaro Collet, James J. Kuffner" for entry Berenson_WGR
 while executing---line 1090 of file plain.bst
 Too many commas in name 1 of "Dmitry Berenson, Siddhartha Srinivasa, Dave Ferguson, Alvaro Collet, James J. Kuffner" for entry Berenson_WGR
 while executing---line 1090 of file plain.bst
 Warning--empty booktitle in Berenson_WGR
 Warning--empty year in Berenson_WGR
+Warning--empty journal in ReinforcementLearningAude
+Warning--empty year in ReinforcementLearningAude
 Warning--empty journal in Nearest_PSDMATRIX
 Warning--empty year in Nearest_PSDMATRIX
-Warning--empty institution in Lavalle98rapidly-exploringrandom
 Warning--empty journal in WhyAdaptiveGrad
 Warning--empty year in WhyAdaptiveGrad
-Warning--empty journal in RGD_RRT
-You've used 28 entries,
+You've used 25 entries,
             2118 wiz_defined-function locations,
-            676 strings with 9350 characters,
-and the built_in function-call counts, 9500 in all, are:
-= -- 925
-> -- 396
-< -- 10
-+ -- 158
-- -- 126
-* -- 592
-:= -- 1512
-add.period$ -- 85
-call.type$ -- 28
-change.case$ -- 147
+            654 strings with 8778 characters,
+and the built_in function-call counts, 8146 in all, are:
+= -- 777
+> -- 347
+< -- 7
++ -- 138
+- -- 110
+* -- 518
+:= -- 1316
+add.period$ -- 73
+call.type$ -- 25
+change.case$ -- 129
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 420
-empty$ -- 789
-format.name$ -- 126
-if$ -- 2065
+cite$ -- 35
+duplicate$ -- 357
+empty$ -- 692
+format.name$ -- 110
+if$ -- 1749
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 27
-newline$ -- 139
-num.names$ -- 58
-pop$ -- 193
+int.to.str$ -- 25
+missing$ -- 25
+newline$ -- 123
+num.names$ -- 52
+pop$ -- 174
 preamble$ -- 1
-purify$ -- 118
+purify$ -- 104
 quote$ -- 0
-skip$ -- 321
+skip$ -- 256
 stack$ -- 0
-substring$ -- 540
-swap$ -- 119
-text.length$ -- 10
+substring$ -- 445
+swap$ -- 87
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 112
-warning$ -- 12
-while$ -- 84
-width$ -- 30
-write$ -- 289
-(There were 10 error messages)
+type$ -- 100
+warning$ -- 10
+while$ -- 73
+width$ -- 27
+write$ -- 254
+(There were 11 error messages)

@@ -1,119 +1,118 @@
 \relax 
 \bibstyle{plain}
+\citation{SylvainLearningGeneralizing}
+\citation{Calinon15}
 \citation{refKeyframe1}
-\citation{refKeyframe2}
-\citation{refKeyframe0}
-\citation{refKeyframe1}
-\citation{refCKframes}
-\citation{refKeyframe2}
-\citation{refKeyframe0}
+\citation{ReinforcementLearningAude}
+\citation{PotentialField}
+\citation{RRTandLFD}
+\citation{ModelAndPRM}
 \@writefile{toc}{\contentsline {section}{\numberline {I}INTRODUCTION}{1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A teacher using kinesthetic teaching with a 6-DOF Kinova Jaco arm to demonstrate a pouring water skill}}{1}}
 \newlabel{Pic_kinesthetik_teaching}{{1}{1}}
-\citation{refKeyframe1}
-\citation{Lavalle98rapidly-exploringrandom}
 \citation{KaramanRRTStar}
-\citation{PathPlanningIn1000}
 \citation{Berenson_WGR}
-\citation{Bertram_2006_5436}
-\citation{Berenson_ConstraintManifold}
+\citation{BerensonTSR}
+\citation{CanalSpace}
+\citation{Berenson_WGR}
 \citation{Berenson_Gradient}
 \citation{Berenson_2010_6558}
-\citation{BerensonTSR}
-\citation{RGD_RRT}
-\citation{informedRRTStar}
-\citation{CanalSpace}
-\citation{RRTandLFD}
-\citation{ModelAndPRM}
 \citation{balancing_statespace_coveragePCA}
 \citation{PCARRT2}
 \citation{PCA_PRM}
+\citation{KeyframesSelfLearning}
 \@writefile{toc}{\contentsline {subsection}{\numberline {I-A}Proposed Approach}{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {I-B}Related Works}{2}}
-\citation{KeyframesSelfImprovementLearning}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Method}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Method}{2}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Planning(${\bm  {\Sigma }}_p,{\bm  {\mu }}_p,{\bm  {\Sigma }}_c,{\bm  {\mu }}_c,\alpha $)}}{3}}
 \newlabel{planning}{{1}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {II-A}Calibration}{3}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {II-A.1}Child and Parent Gaussian}{3}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {II-A.2}Soft-Envelope}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Representation of the Soft-Envelope in 2D and 3D ($\mathbb  {R}^{3}$)}}{3}}
+\newlabel{MixSoftEnvelope}{{2}{3}}
+\newlabel{equaInterCov}{{1d}{3}}
 \citation{Nearest_PSDMATRIX}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Representation of the Soft-Envelope in 2D and 3D}}{4}}
-\newlabel{MixSoftEnvelope}{{2}{4}}
-\newlabel{equaInterCov}{{1d}{4}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {II-A.3}Reduced Soft-Envelope}{4}}
 \newlabel{ReducedSoftEnvelope}{{II-A.3}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Representation of (left image)the Soft-Envelope ($\alpha = 100$) and (right image) Reduced-Soft-Envelope($\alpha = 90$)}}{4}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Reduced\_Soft\_Envelope(${\bm  {\Sigma _{envSet}}}$,${\bm  {\Sigma _{p}}}$,${\bm  {\Sigma _{c}}}$, $\alpha $)}}{4}}
+\newlabel{AlgoRedSoftEnve}{{2}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Representation in ($\mathbb  {R}^{3}$) of the same Soft-Envelope (left image)without dimension reduction ($\alpha = 100 \%$) and (right image) with dimension reduction($\alpha = 90\%$ reduced Soft-Envelope); We can see the effect of the reduction that redefined the contour and make the Gaussian smaller w.r.t the selected eigenvectors.}}{4}}
 \newlabel{100vs90EnvOnly}{{3}{4}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Tikhonov regularization}}{4}}
-\newlabel{ThikoRegu}{{2}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {II-B}PCTC-RRT*}{4}}
 \citation{Filzmoser04amultivariate}
-\citation{KaramanRRTStar}
-\citation{BarisRRT}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II-B}PCT-RRT*}{5}}
+\newlabel{PCT-RRT*}{{II-B}{5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Block diagram of the projection process}}{5}}
 \newlabel{loopControl}{{4}{5}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-B.1}The core of PCTC-RRT*}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Projection process of ${\bm  {p}}_s^j$ onto ${\bm  {p}}_{sRef}$with natural gradient descent guiding ${\bm  {p}}_{sEef}$, the pose of ${\bm  {q}}_s$}}{5}}
+\newlabel{ProjNat}{{5}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-B.1}The core of PCT-RRT*}{5}}
+\newlabel{CoreRRTStar}{{II-B.1}{5}}
 \newlabel{coreRRTstarChapter}{{II-B.1}{5}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-B.2}Sampling}{5}}
-\newlabel{samplingSection}{{II-B.2}{5}}
+\citation{Karaman2011AnytimeMP}
+\citation{KaramanRRTStar}
+\citation{BarisRRT}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces PCT\_RRTStar($G$,${\bm  {\Sigma }}_{envSet}$,${\bm  {\Sigma }}_{redEnvSet}$,${\bm  {\mu }}_{envSet}$, $\alpha $)}}{6}}
+\newlabel{PCTCRRT}{{3}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces All poses in the tree (red cross) with the Nearest function look for: (left) nearest pose, (right) nearest joints angles; The left one is more constrained around the Soft-Envelope}}{6}}
+\newlabel{Nearest}{{6}{6}}
 \citation{WhyAdaptiveGrad}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Extended\_RRTStar($G,{\bm  {q}}_s,{\bm  {p}}_s$)}}{7}}
+\newlabel{Extended_RRTStar}{{4}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-B.2}Sampling}{7}}
+\newlabel{samplingSection}{{II-B.2}{7}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces Sampling\_SoftEnv(${\bm  {\Sigma }}_{envSet}, {\bm  {\Sigma }}_{redEnvSet},\alpha $)}}{7}}
+\newlabel{SoftEnv_Sampling}{{5}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-B.3}Projection - Natural gradient descent}{7}}
 \citation{AdaptiveStepSizeNatGrad}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {II-B.3}Projection - Natural gradient descent}{6}}
-\newlabel{equCostNatGrad}{{5}{6}}
-\newlabel{stepSizeAdaptive}{{6c}{6}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces PCTC\_RRTStar($G$,${\bm  {\Sigma }}_{envSet}$,${\bm  {\Sigma }}_{redEnvSet}$,${\bm  {\mu }}_{envSet}$, $\alpha $)}}{7}}
-\newlabel{PCTCRRT}{{3}{7}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Extended\_RRTStar($G,{\bm  {q}},{\bm  {p}}$)}}{8}}
-\newlabel{Extended_RRTStar}{{4}{8}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces SoftEnv\_Sampling(${\bm  {\Sigma }}_{envSet}, {\bm  {\Sigma }}_{redEnvSet},\alpha $)}}{8}}
-\newlabel{SoftEnv_Sampling}{{5}{8}}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Experiments}{8}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Task 1: Pick and drop}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Setup of the task 1: a plastic wine glass and a Cheez-it box on the table}}{8}}
-\newlabel{task1Scenario}{{5}{8}}
+\citation{Vandeweghe_2007_5981}
+\newlabel{equCostNatGrad}{{5}{8}}
+\newlabel{stepSizeAdaptive}{{6c}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Natural gradient projection of ${\bm  {p}}_s^j$ onto ${\bm  {p}}_{sRef}$ with: (left) stepsize found with backtracking line search method, (right) our stepsize}}{8}}
+\newlabel{Stepsize}{{7}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Experiments and results}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-A}Task 1: Pick and drop}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Setup of the task 1: a plastic wine glass and a Cheez-it box on the table}}{9}}
+\newlabel{task1Scenario}{{8}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Plot of 5 different trajectories (distinction by color) in x,y,z space for task 1 with (right image) $\alpha = 85\%$ and (left image)$\alpha = 100\%$ }}{9}}
+\newlabel{trajectoriesTask1}{{9}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Task 2: Pick and place}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Setup of task 2: a plate and a coffee can on the table}}{10}}
+\newlabel{task2Scenario}{{10}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Plot of 5 different trajectories (distinction by color) in x,y,z space for task 2 with (right image) $\alpha = 85\%$ and (left image)$\alpha = 100\%$ }}{10}}
+\newlabel{task2ModelGaussian}{{11}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-C}Tasks Performance}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Plots: total number of node in tree (col. 1) and Runtime(col. 2) for the first (row 1) and second (row 2) task }}{10}}
+\newlabel{plotGraphAll}{{12}{10}}
 \citation{RRTx}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Plot of 5 different trajectories (distinction by color) in x,y,z space for task 1 with (right image) $\alpha = 85\%$ and (left image)$\alpha = 100\%$ }}{9}}
-\newlabel{trajectoriesTask1}{{6}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Task 2: Pick and place}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Setup of task 2: a plate and a coffee can on the table}}{9}}
-\newlabel{task2Scenario}{{7}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Plot of 5 different trajectories (distinction by color) in x,y,z space for task 2 with (right image) $\alpha = 85\%$ and (left image)$\alpha = 100\%$ }}{9}}
-\newlabel{task2ModelGaussian}{{8}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Tasks Performance}{9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Plots: total number of node in tree (col. 1) and Runtime(col. 2) for the first (row 1) and second (row 2) task }}{9}}
-\newlabel{plotGraphAll}{{9}{9}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Future Work}{9}}
 \bibdata{bible}
-\bibcite{CanalSpace}{1}
-\bibcite{refKeyframe1}{2}
-\bibcite{refKeyframe0}{3}
+\bibcite{PotentialField}{1}
+\bibcite{CanalSpace}{2}
+\bibcite{refKeyframe1}{3}
 \bibcite{BarisRRT}{4}
-\bibcite{refKeyframe2}{5}
-\bibcite{KeyframesSelfImprovementLearning}{6}
-\bibcite{refCKframes}{7}
-\bibcite{Berenson_2010_6558}{8}
-\bibcite{Berenson_ConstraintManifold}{9}
-\bibcite{BerensonTSR}{10}
-\bibcite{Bertram_2006_5436}{11}
-\bibcite{ModelAndPRM}{12}
-\bibcite{RRTandLFD}{13}
-\bibcite{PCARRT2}{14}
-\bibcite{Berenson_WGR}{15}
-\bibcite{Berenson_Gradient}{16}
-\bibcite{Filzmoser04amultivariate}{17}
-\bibcite{informedRRTStar}{18}
-\bibcite{Nearest_PSDMATRIX}{19}
-\bibcite{KaramanRRTStar}{20}
-\bibcite{Lavalle98rapidly-exploringrandom}{21}
-\bibcite{balancing_statespace_coveragePCA}{22}
-\bibcite{AdaptiveStepSizeNatGrad}{23}
-\bibcite{RRTx}{24}
-\bibcite{PCA_PRM}{25}
-\bibcite{WhyAdaptiveGrad}{26}
-\bibcite{PathPlanningIn1000}{27}
-\bibcite{RGD_RRT}{28}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{10}}
-\@writefile{toc}{\contentsline {section}{\numberline {VII}Acknowledgements}{10}}
-\@writefile{toc}{\contentsline {section}{References}{10}}
+\bibcite{KeyframesSelfLearning}{5}
+\bibcite{Berenson_2010_6558}{6}
+\bibcite{BerensonTSR}{7}
+\bibcite{Calinon15}{8}
+\bibcite{SylvainLearningGeneralizing}{9}
+\bibcite{ModelAndPRM}{10}
+\bibcite{RRTandLFD}{11}
+\bibcite{PCARRT2}{12}
+\bibcite{Berenson_WGR}{13}
+\bibcite{Berenson_Gradient}{14}
+\bibcite{Filzmoser04amultivariate}{15}
+\bibcite{ReinforcementLearningAude}{16}
+\bibcite{Nearest_PSDMATRIX}{17}
+\bibcite{KaramanRRTStar}{18}
+\bibcite{Karaman2011AnytimeMP}{19}
+\bibcite{balancing_statespace_coveragePCA}{20}
+\bibcite{AdaptiveStepSizeNatGrad}{21}
+\bibcite{RRTx}{22}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Discussion}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Future Work}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Acknowledgements}{11}}
+\@writefile{toc}{\contentsline {section}{References}{11}}
+\bibcite{PCA_PRM}{23}
+\bibcite{WhyAdaptiveGrad}{24}
+\bibcite{Vandeweghe_2007_5981}{25}
